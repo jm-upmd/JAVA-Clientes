@@ -12,8 +12,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		final String F_ENTRADA = "O:\\Curso Java\\Proyectos Eclipse\\Practica Clientes\\Clientes.txt";		
-		final String F_SALIDA = "O:\\Curso Java\\Proyectos Eclipse\\Practica Clientes\\ClientesSalida.txt";		
+		final String F_ENTRADA = "H:\\Cursos Actuales\\Curso Java\\Proyectos Eclipse\\Practica Clientes\\Clientes.txt";		
+		final String F_SALIDA = "H:\\Cursos Actuales\\Curso Java\\Proyectos Eclipse\\Practica Clientes\\ClientesSalida.txt";		
 
 
 		// Para guardar todos los objetos Cliente
@@ -23,11 +23,14 @@ public class Main {
 		leeClientes(listaClientes, F_ENTRADA);
 
 		// Muestra clientes de España
+		System.out.println("*** CLIENTES DE ESPAÑA ***");
 		muestraPorNacionalidad(listaClientes);
 
 		System.out.println("\n\n************************\n");
 
 		// Muestra clientes de Alemania
+		System.out.println("*** CLIENTES DE ALEMANIA ***");
+
 		muestraPorNacionalidad(listaClientes, "Alemania");
 		
 		
@@ -86,7 +89,7 @@ public class Main {
 			pw = new PrintWriter(fw);
 
 			for (Cliente c : clientes) {
-				pw.println(c.toString());
+				pw.println(c.objetoAString());
 			}
 
 		} catch (IOException e) {

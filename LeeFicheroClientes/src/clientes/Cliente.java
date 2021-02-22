@@ -17,6 +17,8 @@ class Cliente {
 	private String telefono;
 	private String fax;
 	
+	private static final String S_IZQ = "    "; // Sangría izquierda
+	
 	
 	//	Constructor
 	
@@ -37,7 +39,6 @@ class Cliente {
 		this.fax = fax;
 	}
 
-	// Devuelve true si el cliente es 
 	
 	/*
 	 * devuelve true si la empresa cliente está ubicada en España; false en otro caso
@@ -47,11 +48,10 @@ class Cliente {
 	}
 	
 	// Sobreescribo metod toString para que me debuelva un String con el formato 
-	// original de campos separados por punto y como, tal y como estaba en el 
+	// original de campos separados por punto y coma, tal y como estaba en el 
 	// fichero de texto.
 	
-	@Override
-	public String toString() {
+	public String objetoAString() {
 		final char sep = ';'; // Caracter separdor de campo
 		// Creo un StringBuilder para componer el registro con los datos
 		// del objeto.
@@ -85,6 +85,21 @@ class Cliente {
 		// StringBuilder está reescrito pra que devuelva un String con su contenido tal cual.
 		
 		return registro.toString();
+		
+	}
+	
+	@Override
+	public String toString() {
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(S_IZQ).append("Id. Cliente: ").append(idCliente).append("\n");
+		sb.append(S_IZQ).append("Nombre Contacto: ").append(nombreContacto).append("\n");
+		sb.append(S_IZQ).append("Antigüedad: ").append(antiguedad).append("\n");
+		sb.append(S_IZQ).append("Facturación: ").append(facturacion).append("\n");
+		sb.append(S_IZQ).append("Nombre Compañía: ").append(nombreCompañia).append("\n");
+		sb.append(S_IZQ).append("Nombre Ciudad: ").append(ciudad).append("\n\n");
+		
+		return sb.toString();
 		
 	}
 	
@@ -200,10 +215,4 @@ class Cliente {
 		this.telefono = telefono;
 	}
 	
-	
-	
-	
-	
-	
-
 }
