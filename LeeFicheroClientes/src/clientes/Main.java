@@ -49,8 +49,24 @@ public class Main {
 		
 		// Creo instancia de Scanner para leer del fichero
 		Scanner scnr = null;
+		
+		/* Distintos sistemas operativos utilizan distintos caracteres de fin de línea:
+			 Windosws usa dos: \r\n
+			 Linux / Unix: \n
+			 Mac: \r
+		 Vamos a leer por líneas sc.nexLine() pero vamos a establecer el
+		 sc.useDelimiter con una expresión regular que contemple los tres casos.
+		 Una buena entrada en Stack Overflow que habla sobre esto:
+		 	https://stackoverflow.com/questions/1981497/java-scanner-question
+		 Expresión regular   hace matching con \r ó \n ó \r\n
+		 Esta también hace lo mismo "\r|\n|\r\n"
+		  
+		 */
 		try {
 			scnr = new Scanner(f); // Se le pasa como parametro el objeto File
+			
+			// Contempla las tres opciones de fin de línea descritas anteriormente.
+			scnr.useDelimiter("\r?\n|\r"); 
 
 			// Leyendo líneas del fichero con Scanner
 
@@ -62,7 +78,6 @@ public class Main {
 				// El objeto devuelto es añadido al ArrayList listaClientes
 
 				lista.add(creaObjetoCliente(linea));
-				System.out.println("Creado objeto cliente...");
 			}
 
 		} catch (FileNotFoundException e) {
@@ -131,6 +146,11 @@ public class Main {
 			System.exit(-1);
 		}
 		
+		// Fijáos en el último pármetro del constructor.
+		// Si una línea leída no tiene el último campo (Fax), como por ejemplo el tercer registro del fichero,
+		// al hacer split() de la línea genera un array de tamaño 12 en vez de 13.
+		// En ese caso le asignamos a Fax la cadena vacía.
+		
 		Cliente cliente = new Cliente(tokens[0], tokens[1], tokens[2], antiguedad, facturacion, 
 				tokens[5], tokens[6], tokens[7], tokens[8], tokens[9], tokens[10], tokens[11],tokens.length == 13 ? tokens[12] : "");
 
@@ -141,17 +161,11 @@ public class Main {
 	private static void muestraPorNacionalidad(ArrayList<Cliente> lista) {
 		int totClientes = 0;
 		float totFacturacion = 0;
-		final char TAB = '\t';
 
 		for (Cliente c : lista) {
 			if (c.esEspañol()) {
 				System.out.println("Registro " + ++totClientes);
-				System.out.println(TAB + "Id. Cliente: " + c.getIdCliente());
-				System.out.println(TAB + "Nombre Contacto: " + c.getNombreContacto());
-				System.out.println(TAB + "Antigüedad: " + c.getAntiguedad());
-				System.out.println(TAB + "Facturación: " + c.getFacturacion());
-				System.out.println(TAB + "Nombre Compañía: " + c.getNombreCompañia());
-				System.out.println(TAB + "Nombre Ciudad: " + c.getCiudad() + '\n');
+				System.out.print(c.toString());
 				totFacturacion+=c.getFacturacion();
 
 			}
@@ -169,18 +183,13 @@ public class Main {
 	private static void muestraPorNacionalidad(ArrayList<Cliente> lista, String nac) {
 		int totClientes = 0;
 		float totFacturacion = 0;
-		final char TAB = '\t';
+		//final char TAB = '\t';
 
 		for (Cliente c : lista) {
 
 			if (c.getPais().toUpperCase().compareTo(nac.toUpperCase()) == 0) {
 				System.out.println("Registro " + ++totClientes + " (" + c.getPais() + ")");
-				System.out.println(TAB + "Id. Cliente: " + c.getIdCliente());
-				System.out.println(TAB + "Nombre Contacto: " + c.getNombreContacto());
-				System.out.println(TAB + "Antigüedad " + c.getAntiguedad());
-				System.out.println(TAB + "Facturación " + c.getFacturacion());
-				System.out.println(TAB + "Nombre Compañía: " + c.getNombreCompañia());
-				System.out.println(TAB + "Nombre Ciudad: " + c.getCiudad() + '\n');
+				System.out.print(c.toString());
 				totFacturacion+=c.getFacturacion();
 			}
 		}
