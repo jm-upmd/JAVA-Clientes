@@ -12,7 +12,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		final String F_ENTRADA = "H:\\Cursos Actuales\\Curso Java\\Proyectos Eclipse\\Practica Clientes\\Clientes.txt";		
+		final String F_ENTRADA = "H:\\Cursos Actuales\\Curso Java\\Practica Clientes\\Clientes_CR.txt";		
 		final String F_SALIDA = "H:\\Cursos Actuales\\Curso Java\\Proyectos Eclipse\\Practica Clientes\\ClientesSalida.txt";		
 
 
@@ -49,25 +49,10 @@ public class Main {
 		
 		// Creo instancia de Scanner para leer del fichero
 		Scanner scnr = null;
-		
-		/* Distintos sistemas operativos utilizan distintos caracteres de fin de línea:
-			 Windosws usa dos: \r\n
-			 Linux / Unix: \n
-			 Mac: \r
-		 Vamos a leer por líneas sc.nexLine() pero vamos a establecer el
-		 sc.useDelimiter con una expresión regular que contemple los tres casos.
-		 Una buena entrada en Stack Overflow que habla sobre esto:
-		 	https://stackoverflow.com/questions/1981497/java-scanner-question
-		 Expresión regular   hace matching con \r ó \n ó \r\n
-		 Esta también hace lo mismo "\r|\n|\r\n"
-		  
-		 */
+
 		try {
 			scnr = new Scanner(f); // Se le pasa como parametro el objeto File
 			
-			// Contempla las tres opciones de fin de línea descritas anteriormente.
-			scnr.useDelimiter("\r?\n|\r"); 
-
 			// Leyendo líneas del fichero con Scanner
 
 			while (scnr.hasNextLine()) { // Mientras queden líneas por leer
